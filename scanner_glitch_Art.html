@@ -43,11 +43,32 @@
                 </div>
             </div>
             
-            <!-- Language Toggle Button -->
-            <button id="btnToggleLanguage" class="px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
-                <i class="fa-solid fa-language text-emerald-400"></i>
-                <span id="langBtnText">English</span>
-            </button>
+            <!-- Header Right: Social, Sponsor + Language buttons -->
+            <div class="flex items-center gap-2">
+                <!-- Instagram Button -->
+                <a href="https://instagram.com/yhhydesign" target="_blank" rel="noopener noreferrer" class="px-3 py-1 text-xs font-semibold bg-[#E1306C]/10 hover:bg-[#E1306C]/20 border border-[#E1306C]/30 rounded-lg text-pink-500 hover:text-pink-400 transition flex items-center gap-1.5" title="Follow on Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>Follow on Instagram</span>
+                </a>
+
+                <!-- PayPal Sponsorship Button -->
+                <a href="https://paypal.me/yhhydesign/" target="_blank" rel="noopener noreferrer" class="px-3 py-1 text-xs font-semibold bg-[#0079C1]/10 hover:bg-[#0079C1]/20 border border-[#0079C1]/30 rounded-lg text-sky-400 hover:text-sky-300 transition flex items-center gap-1.5" title="Sponsor via PayPal">
+                    <i class="fa-brands fa-paypal"></i>
+                    <span>Donate via PayPal</span>
+                </a>
+                
+                <!-- Buy Me a Coffee Sponsorship Button -->
+                <a href="https://ko-fi.com/J1R822XXM9" target="_blank" rel="noopener noreferrer" class="px-3 py-1 text-xs font-semibold bg-[#FFDD00]/10 hover:bg-[#FFDD00]/20 border border-[#FFDD00]/30 rounded-lg text-amber-400 hover:text-amber-300 transition flex items-center gap-1.5" title="Buy me a coffee">
+                    <i class="fa-solid fa-mug-hot"></i>
+                    <span>Buy me a coffee</span>
+                </a>
+
+                <!-- Language Toggle Button -->
+                <button id="btnToggleLanguage" class="px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-language text-emerald-400"></i>
+                    <span id="langBtnText">En/中文</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -179,7 +200,7 @@
                             <i class="fa-solid fa-palette mr-0.5"></i> <span data-i18n="colorBtn">Color</span>
                         </button>
                         <button id="colorModeBtnBW" class="color-mode-btn py-1 text-[10px] font-semibold rounded-lg border bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-300 transition-all">
-                            <i class="fa-solid fa-circle-half-stroke mr-0.5"></i> <span data-i18n="monoBtn">Mono</span>
+                            <i class="fa-solid fa-circle-half-stroke mr-0.5"></i> <span data-i18n="monoBtn">B&W</span>
                         </button>
                     </div>
                     
@@ -225,7 +246,7 @@
             <!-- Module 4: Run Controls (Placed last) -->
             <div class="flex flex-col justify-between px-3.5">
                 <h2 class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 mb-1.5 flex items-center gap-1">
-                    <i class="fa-solid fa-play"></i> <span data-i18n="controlTitle">4. Start to Scan</span>
+                    <i class="fa-solid fa-play"></i> <span data-i18n="controlTitle">4. CONTROLS</span>
                 </h2>
                 <div class="flex-grow flex flex-col justify-center gap-2">
                     <button id="btnPlayPause" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md shadow-emerald-950/20">
@@ -236,6 +257,15 @@
                         <i class="fa-solid fa-rotate-left"></i>
                         <span data-i18n="resetScan">Reset Scan</span>
                     </button>
+
+                    <!-- Spacing block as requested -->
+                    <div class="h-2 flex-shrink-0"></div>
+
+                    <!-- Buy Me a Coffee Support Button under Reset Scan -->
+                    <a href="https://ko-fi.com/J1R822XXM9" target="_blank" rel="noopener noreferrer" class="w-full py-1.5 px-3 bg-[#FFDD00] hover:bg-[#ffea55] rounded-lg text-slate-900 transition flex items-center justify-center gap-2 font-extrabold text-[11px] shadow-sm shadow-[#FFDD00]/10" title="Buy me a coffee">
+                        <i class="fa-solid fa-mug-hot text-xs"></i>
+                        <span>Support on Ko-fi</span>
+                    </a>
                 </div>
             </div>
 
@@ -254,8 +284,7 @@
         <p data-i18n="pressR">© 2026 Scanner Distortion Lab • Exploring space-time recombination.</p>
     </footer>
 
-   
-   
+       
     <script src="https://yhhydesign.github.io/js_hosting/scanner.js" defer></script>
 
 </body>
