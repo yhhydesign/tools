@@ -44,7 +44,7 @@
             </div>
             
             <!-- Language Toggle Button -->
-            <button onclick="toggleLanguage()" class="px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
+            <button id="btnToggleLanguage" class="px-3 py-1 text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
                 <i class="fa-solid fa-language text-emerald-400"></i>
                 <span id="langBtnText">English</span>
             </button>
@@ -80,7 +80,7 @@
 
                 <!-- Interactive Transform Helper -->
                 <div class="mt-2 flex-shrink-0">
-                    <button onclick="transformImage('rotate90')" class="w-full py-1.5 text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-md transition border border-slate-700/50 flex items-center justify-center gap-1" title="旋转90度">
+                    <button id="btnRotate90" class="w-full py-1.5 text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-md transition border border-slate-700/50 flex items-center justify-center gap-1" title="旋转90度">
                         <i class="fa-solid fa-rotate-right text-emerald-400"></i> <span data-i18n="rotate90">Rotate 90°</span>
                     </button>
                 </div>
@@ -109,10 +109,10 @@
 
                 <!-- Output Helpers and Export -->
                 <div class="mt-2 flex gap-2 flex-shrink-0">
-                    <button onclick="clearOutputFilm()" class="flex-1 py-1.5 text-[11px] bg-slate-800 hover:bg-red-950/40 hover:text-red-400 hover:border-red-900/50 text-slate-300 border border-transparent rounded-md transition">
+                    <button id="btnClearFilm" class="flex-1 py-1.5 text-[11px] bg-slate-800 hover:bg-red-950/40 hover:text-red-400 hover:border-red-900/50 text-slate-300 border border-transparent rounded-md transition">
                         <i class="fa-solid fa-trash mr-1"></i> <span data-i18n="clearFilm">Clear Film</span>
                     </button>
-                    <button onclick="downloadMasterpiece()" class="flex-1 py-1.5 text-[11px] bg-slate-800 hover:bg-slate-700 text-white rounded-md transition flex items-center justify-center gap-1 font-bold">
+                    <button id="btnDownloadMasterpiece" class="flex-1 py-1.5 text-[11px] bg-slate-800 hover:bg-slate-700 text-white rounded-md transition flex items-center justify-center gap-1 font-bold">
                         <i class="fa-solid fa-download mr-1"></i> <span data-i18n="exportArt">Export Artwork</span>
                     </button>
                 </div>
@@ -151,15 +151,15 @@
                             <span data-i18n="speedLabel">Scan Speed</span>
                             <span class="code-font text-emerald-400" id="valSpeed">1.0 px/frame</span>
                         </div>
-                        <input type="range" id="paramSpeed" min="0.5" max="8" step="0.1" value="1.0" oninput="updateParam('Speed')" class="w-full accent-emerald-400 h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                        <input type="range" id="paramSpeed" min="0.5" max="8" step="0.1" value="1.0" class="w-full accent-emerald-400 h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
                     </div>
                     <!-- Direction -->
                     <div>
                         <div class="grid grid-cols-2 gap-1.5">
-                            <button id="dirBtnY" onclick="setDirection('Y')" class="dir-btn py-1 text-[10px] font-semibold rounded-lg border bg-emerald-500/10 border-emerald-500/50 text-emerald-300 transition-all">
+                            <button id="dirBtnY" class="dir-btn py-1 text-[10px] font-semibold rounded-lg border bg-emerald-500/10 border-emerald-500/50 text-emerald-300 transition-all">
                                 <i class="fa-solid fa-arrow-down mr-0.5"></i> <span data-i18n="dirY">Vertical (Y)</span>
                             </button>
-                            <button id="dirBtnX" onclick="setDirection('X')" class="dir-btn py-1 text-[10px] font-semibold rounded-lg border bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-300 transition-all">
+                            <button id="dirBtnX" class="dir-btn py-1 text-[10px] font-semibold rounded-lg border bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-300 transition-all">
                                 <i class="fa-solid fa-arrow-right mr-0.5"></i> <span data-i18n="dirX">Horizontal (X)</span>
                             </button>
                         </div>
@@ -175,10 +175,10 @@
                 <div class="flex-grow flex flex-col justify-center gap-1.5">
                     <!-- Color Mode -->
                     <div class="grid grid-cols-2 gap-1.5">
-                        <button id="colorModeBtnColor" onclick="setColorMode('color')" class="color-mode-btn py-1 text-[10px] font-semibold rounded-lg border bg-emerald-500/10 border-emerald-500/50 text-emerald-300 transition-all">
+                        <button id="colorModeBtnColor" class="color-mode-btn py-1 text-[10px] font-semibold rounded-lg border bg-emerald-500/10 border-emerald-500/50 text-emerald-300 transition-all">
                             <i class="fa-solid fa-palette mr-0.5"></i> <span data-i18n="colorBtn">Color</span>
                         </button>
-                        <button id="colorModeBtnBW" onclick="setColorMode('bw')" class="color-mode-btn py-1 text-[10px] font-semibold rounded-lg border bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-300 transition-all">
+                        <button id="colorModeBtnBW" class="color-mode-btn py-1 text-[10px] font-semibold rounded-lg border bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-300 transition-all">
                             <i class="fa-solid fa-circle-half-stroke mr-0.5"></i> <span data-i18n="monoBtn">Mono</span>
                         </button>
                     </div>
@@ -189,7 +189,7 @@
                             <i class="fa-solid fa-eye-dropper text-[9px] text-emerald-400"></i> <span data-i18n="bgColorLabel">Background Color</span>
                         </span>
                         <div class="flex items-center gap-1.5 bg-slate-950/60 border border-slate-800 rounded px-1.5 py-0.5">
-                            <input type="color" id="paramBgColor" value="#ffffff" oninput="updateBgColor(this.value)" class="w-4 h-4 bg-transparent border-0 cursor-pointer rounded-sm overflow-hidden p-0">
+                            <input type="color" id="paramBgColor" value="#ffffff" class="w-4 h-4 bg-transparent border-0 cursor-pointer rounded-sm overflow-hidden p-0">
                             <span class="code-font text-[9px] text-emerald-400 uppercase" id="valBgColor">#FFFFFF</span>
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                             <span data-i18n="noiseLabel">Noise Grain</span>
                             <span class="code-font text-emerald-400" id="valNoise">40%</span>
                         </div>
-                        <input type="range" id="paramNoise" min="0" max="100" step="1" value="40" oninput="updateParam('Noise')" class="w-full accent-emerald-400 h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                        <input type="range" id="paramNoise" min="0" max="100" step="1" value="40" class="w-full accent-emerald-400 h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
                     </div>
 
                     <!-- Wobble Displacement -->
@@ -209,7 +209,7 @@
                             <span data-i18n="wobbleLabel">Sine Wobble Displacement</span>
                             <span class="code-font text-emerald-400" id="valWobble">0.0 px</span>
                         </div>
-                        <input type="range" id="paramWobble" min="0" max="100" step="1" value="0" oninput="updateParam('Wobble')" class="w-full accent-emerald-400 h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+                        <input type="range" id="paramWobble" min="0" max="100" step="1" value="0" class="w-full accent-emerald-400 h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
                     </div>
 
                     <!-- Show Parameter Overlay Toggle -->
@@ -217,7 +217,7 @@
                         <span class="text-[10px] text-slate-400 flex items-center gap-1">
                             <i class="fa-solid fa-circle-info text-[9px] text-emerald-400"></i> <span data-i18n="showInfoLabel">Show Parameter Info</span>
                         </span>
-                        <input type="checkbox" id="paramShowInfo" onchange="toggleShowInfo()" checked class="w-3.5 h-3.5 rounded accent-emerald-400 cursor-pointer">
+                        <input type="checkbox" id="paramShowInfo" checked class="w-3.5 h-3.5 rounded accent-emerald-400 cursor-pointer">
                     </div>
                 </div>
             </div>
@@ -228,11 +228,11 @@
                     <i class="fa-solid fa-play"></i> <span data-i18n="controlTitle">4. Start to Scan</span>
                 </h2>
                 <div class="flex-grow flex flex-col justify-center gap-2">
-                    <button id="btnPlayPause" onclick="toggleScan()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md shadow-emerald-950/20">
+                    <button id="btnPlayPause" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-md shadow-emerald-950/20">
                         <i id="playIcon" class="fa-solid fa-play"></i>
                         <span id="playText" data-i18n="startScan">Start Scan</span>
                     </button>
-                    <button onclick="resetScan()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5">
+                    <button id="btnResetScan" class="w-full py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5">
                         <i class="fa-solid fa-rotate-left"></i>
                         <span data-i18n="resetScan">Reset Scan</span>
                     </button>
@@ -254,6 +254,7 @@
         <p data-i18n="pressR">© 2026 Scanner Distortion Lab • Exploring space-time recombination.</p>
     </footer>
 
+   
    
     <script src="https://yhhydesign.github.io/js_hosting/scanner.js" defer></script>
 
