@@ -51,45 +51,22 @@
             background: #1e293b;
             border-radius: 3px;
         }
-        /* Toggle Switch Styling */
-        .toggle-checkbox:checked {
-            right: 0;
-            background-color: #10b981;
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #059669;
-        }
     </style>
 </head>
 <body class="text-slate-100 flex flex-col bg-grid h-screen h-[100dvh] overflow-hidden">
 
-    <!-- Header -->
-    <header class="border-b border-slate-800/80 bg-slate-950/90 px-4 py-2 flex-shrink-0 z-20">
-        <div class="max-w-md mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="h-7 w-7 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/30">
-                    <i class="fa-solid fa-print text-emerald-400 text-sm animate-pulse"></i>
-                </div>
-                <h1 class="text-sm font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
-                    SCANNER DISTORTION LAB
-                </h1>
-            </div>
-            <span class="text-[10px] code-font text-emerald-400/80 bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded-md">Designed by typowow</span>
-        </div>
-    </header>
-
-    <!-- Main Workspace Container -->
+    <!-- Main Workspace Container (Full Height Mobile Frame) -->
     <main class="flex-1 min-h-0 flex flex-col justify-between max-w-md w-full mx-auto p-3 gap-2.5 overflow-hidden">
         
-        <!-- Top Unified Canvas Viewport (WYSIWYG) -->
+        <!-- Dynamic Aspect Ratio Viewport (WYSIWYG Scan Canvas) -->
         <section class="flex-1 min-h-0 flex flex-col bg-slate-900/80 border border-slate-800 rounded-2xl p-2 relative backdrop-blur-md overflow-hidden">
             <div class="flex-1 min-h-0 relative w-full rounded-xl overflow-hidden bg-slate-950 border border-slate-800 flex items-center justify-center select-none shadow-inner" id="canvasContainer">
                 
-                <!-- Main Composite Canvas -->
+                <!-- Dynamic High-Res Composite Canvas -->
                 <canvas id="mainCanvas" class="w-full h-full object-contain cursor-grab active:cursor-grabbing" style="background-color: #0b0f19;"></canvas>
 
                 <!-- Gesture Tip Floating Bar at Bottom of Canvas -->
-                <div class="absolute bottom-2 inset-x-3 bg-slate-950/80 border border-slate-800/80 rounded-lg py-1.5 px-2.5 text-center pointer-events-none backdrop-blur-sm shadow-lg">
+                <div class="absolute bottom-2 inset-x-3 bg-slate-950/80 border border-slate-800/80 rounded-lg py-1.5 px-2.5 text-center pointer-events-none backdrop-blur-sm shadow-lg z-10">
                     <p class="text-[11px] text-slate-300 font-medium tracking-wide flex items-center justify-center gap-1.5">
                         <i class="fa-solid fa-hand-pointer text-emerald-400 text-xs"></i>
                         <span>单指拖动、双指缩放或旋转</span>
@@ -98,44 +75,49 @@
             </div>
         </section>
 
-        <!-- Middle 5 Icon Buttons Dock -->
+        <!-- Middle 5 Icon Buttons Dock with Labels -->
         <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-2 backdrop-blur-md flex-shrink-0">
-            <div class="grid grid-cols-5 gap-2">
+            <div class="grid grid-cols-5 gap-1.5">
                 
                 <!-- 1. Horizontal Scan -->
-                <button id="btnDirX" class="dir-btn py-3 bg-slate-800 hover:bg-slate-700 active:scale-95 border border-slate-700 rounded-xl transition flex items-center justify-center text-slate-300 font-bold shadow-sm" title="横向扫描">
-                    <i class="fa-solid fa-arrow-right text-emerald-400 text-base"></i>
+                <button id="btnDirX" class="dir-btn py-2 px-1 bg-slate-800 hover:bg-slate-700 active:scale-95 border border-slate-700 rounded-xl transition flex flex-col items-center justify-center gap-1 text-slate-300 font-medium shadow-sm" title="横向扫描">
+                    <i class="fa-solid fa-arrow-right text-emerald-400 text-sm"></i>
+                    <span class="text-[10px] tracking-tight">横向</span>
                 </button>
 
                 <!-- 2. Vertical Scan -->
-                <button id="btnDirY" class="dir-btn py-3 bg-emerald-500/10 border-emerald-500/50 text-emerald-300 active:scale-95 border rounded-xl transition flex items-center justify-center font-bold shadow-sm" title="纵向扫描">
-                    <i class="fa-solid fa-arrow-down text-emerald-400 text-base"></i>
+                <button id="btnDirY" class="dir-btn py-2 px-1 bg-emerald-500/10 border-emerald-500/50 text-emerald-300 active:scale-95 border rounded-xl transition flex flex-col items-center justify-center gap-1 font-medium shadow-sm" title="纵向扫描">
+                    <i class="fa-solid fa-arrow-down text-emerald-400 text-sm"></i>
+                    <span class="text-[10px] tracking-tight">纵向</span>
                 </button>
 
                 <!-- 3. Upload Image -->
                 <div class="relative group">
                     <input type="file" id="imageLoader" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer z-10" />
-                    <button class="w-full h-full py-3 bg-slate-800 hover:bg-slate-700 active:scale-95 border border-slate-700 rounded-xl transition flex items-center justify-center text-emerald-400 font-bold shadow-sm">
-                        <i class="fa-solid fa-plus text-lg"></i>
+                    <button class="w-full h-full py-2 px-1 bg-slate-800 hover:bg-slate-700 active:scale-95 border border-slate-700 rounded-xl transition flex flex-col items-center justify-center gap-1 text-emerald-400 font-medium shadow-sm">
+                        <i class="fa-solid fa-plus text-base"></i>
+                        <span class="text-[10px] text-slate-300 tracking-tight">上传</span>
                     </button>
                 </div>
 
                 <!-- 4. Color -->
-                <button id="btnColorMode" class="color-btn py-3 bg-emerald-500/10 border-emerald-500/50 text-emerald-300 active:scale-95 border rounded-xl transition flex items-center justify-center font-bold shadow-sm" title="彩色">
-                    <span class="h-4 w-4 rounded-full bg-gradient-to-tr from-amber-400 via-rose-500 to-emerald-400 border border-white/20 shadow-sm"></span>
+                <button id="btnColorMode" class="color-btn py-2 px-1 bg-emerald-500/10 border-emerald-500/50 text-emerald-300 active:scale-95 border rounded-xl transition flex flex-col items-center justify-center gap-1 font-medium shadow-sm" title="彩色">
+                    <span class="h-3.5 w-3.5 rounded-full bg-gradient-to-tr from-amber-400 via-rose-500 to-emerald-400 border border-white/20 shadow-sm"></span>
+                    <span class="text-[10px] tracking-tight">彩色</span>
                 </button>
 
                 <!-- 5. Black & White -->
-                <button id="btnBWMode" class="color-btn py-3 bg-slate-800 hover:bg-slate-700 active:scale-95 border border-slate-700 rounded-xl transition flex items-center justify-center text-slate-300 font-bold shadow-sm" title="黑白">
-                    <i class="fa-solid fa-circle-half-stroke text-slate-300 text-base"></i>
+                <button id="btnBWMode" class="color-btn py-2 px-1 bg-slate-800 hover:bg-slate-700 active:scale-95 border border-slate-700 rounded-xl transition flex flex-col items-center justify-center gap-1 text-slate-300 font-medium shadow-sm" title="黑白">
+                    <i class="fa-solid fa-circle-half-stroke text-slate-300 text-sm"></i>
+                    <span class="text-[10px] tracking-tight">黑白</span>
                 </button>
 
             </div>
         </section>
 
-        <!-- Parameters Settings Row (Noise Grain & Show Info Toggle) -->
+        <!-- Parameters Settings Row (Noise Grain & Reset Canvas Button) -->
         <section class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3 backdrop-blur-md flex-shrink-0">
-            <div class="grid grid-cols-2 gap-4 items-center">
+            <div class="grid grid-cols-2 gap-3 items-center">
                 
                 <!-- Left: Noise Grain Setting -->
                 <div class="flex flex-col">
@@ -149,16 +131,12 @@
                     <input type="range" id="paramNoise" min="0" max="100" step="1" value="40" class="w-full accent-emerald-400">
                 </div>
 
-                <!-- Right: Show Info Switch -->
-                <div class="flex items-center justify-between pl-2 border-l border-slate-800">
-                    <span class="text-[11px] text-slate-300 font-semibold flex items-center gap-1">
-                        <i class="fa-solid fa-circle-info text-emerald-400 text-[10px]"></i>
-                        <span>显示参数</span>
-                    </span>
-                    <label class="relative inline-flex items-center cursor-pointer select-none">
-                        <input type="checkbox" id="paramShowInfo" class="sr-only peer" checked>
-                        <div class="w-9 h-5 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500"></div>
-                    </label>
+                <!-- Right: Reset Canvas Button -->
+                <div class="flex items-center justify-end pl-2 border-l border-slate-800">
+                    <button id="btnResetCanvas" class="w-full py-2 bg-slate-800 hover:bg-slate-700 active:scale-95 border border-slate-700/80 rounded-xl transition flex items-center justify-center gap-1.5 text-slate-200 text-[11px] font-semibold shadow-sm">
+                        <i class="fa-solid fa-rotate-left text-emerald-400 text-[10px]"></i>
+                        <span>重置画面</span>
+                    </button>
                 </div>
 
             </div>
@@ -189,33 +167,23 @@
         <span id="toastText">请先上传一张图片！</span>
     </div>
 
-    <!-- JavaScript Engine -->
     <script>
         const canvas = document.getElementById('mainCanvas');
         const ctx = canvas.getContext('2d');
+        const container = document.getElementById('canvasContainer');
 
         const imageLoader = document.getElementById('imageLoader');
         const btnPlayPause = document.getElementById('btnPlayPause');
         const playIcon = document.getElementById('playIcon');
         const playText = document.getElementById('playText');
         const paramNoise = document.getElementById('paramNoise');
-        const paramShowInfo = document.getElementById('paramShowInfo');
+        const btnResetCanvas = document.getElementById('btnResetCanvas');
 
-        // High resolution square canvas buffer
-        const CANVAS_SIZE = 800;
-        canvas.width = CANVAS_SIZE;
-        canvas.height = CANVAS_SIZE;
-
-        // Frozen Slit-Scan Output Buffer Layer
+        // Dynamic Offscreen Buffer Canvases
         const scanBufferCanvas = document.createElement('canvas');
-        scanBufferCanvas.width = CANVAS_SIZE;
-        scanBufferCanvas.height = CANVAS_SIZE;
         const scanBufferCtx = scanBufferCanvas.getContext('2d');
 
-        // Temporary slice buffer
         const liveSourceCanvas = document.createElement('canvas');
-        liveSourceCanvas.width = CANVAS_SIZE;
-        liveSourceCanvas.height = CANVAS_SIZE;
         const liveSourceCtx = liveSourceCanvas.getContext('2d');
 
         // Noise Texture Generator Canvas
@@ -237,8 +205,8 @@
         let imgState = {
             loaded: false,
             imgObj: null,
-            x: CANVAS_SIZE / 2,
-            y: CANVAS_SIZE / 2,
+            x: 0,
+            y: 0,
             scale: 1,
             rotation: 0 // Radians
         };
@@ -260,18 +228,58 @@
         let scanLinePos = 0;
         let scanDirection = 'Y'; // 'Y' or 'X'
         let settings = {
-            speed: 1.5,
+            speed: 2.0,
             noise: 40,
-            colorMode: 'color', // 'color' or 'bw'
-            showInfo: true
+            colorMode: 'color' // 'color' or 'bw'
         };
 
         let renderId = null;
 
-        // Initialize Application
+        function updateCanvasDimensions() {
+            if (!container) return;
+            const rect = container.getBoundingClientRect();
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            
+            const w = Math.max(100, Math.floor(rect.width * dpr));
+            const h = Math.max(100, Math.floor(rect.height * dpr));
+
+            if (canvas.width !== w || canvas.height !== h) {
+                canvas.width = w;
+                canvas.height = h;
+
+                scanBufferCanvas.width = w;
+                scanBufferCanvas.height = h;
+
+                liveSourceCanvas.width = w;
+                liveSourceCanvas.height = h;
+
+                if (imgState.loaded && imgState.x === 0 && imgState.y === 0) {
+                    fitImageToCanvas();
+                }
+                triggerRender();
+            }
+        }
+
+        function fitImageToCanvas() {
+            if (!imgState.imgObj) return;
+            const scaleW = canvas.width / imgState.imgObj.width;
+            const scaleH = canvas.height / imgState.imgObj.height;
+            imgState.scale = Math.min(scaleW, scaleH) * 0.85;
+            imgState.x = canvas.width / 2;
+            imgState.y = canvas.height / 2;
+            imgState.rotation = 0;
+        }
+
         window.onload = function() {
+            updateCanvasDimensions();
             resetScanBuffer();
             setupTouchAndMouse();
+
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                updateCanvasDimensions();
+                triggerRender();
+            });
 
             // File Upload Handler
             imageLoader.addEventListener('change', (e) => {
@@ -281,7 +289,6 @@
             });
 
             // Drag and drop onto canvas
-            const container = document.getElementById('canvasContainer');
             container.addEventListener('dragover', (e) => e.preventDefault());
             container.addEventListener('drop', (e) => {
                 e.preventDefault();
@@ -308,6 +315,9 @@
             document.getElementById('btnColorMode').addEventListener('click', () => setColorMode('color'));
             document.getElementById('btnBWMode').addEventListener('click', () => setColorMode('bw'));
 
+            // Reset Canvas Button
+            btnResetCanvas.addEventListener('click', resetCanvasAndImage);
+
             // Parameter Controls
             paramNoise.addEventListener('input', () => {
                 settings.noise = parseInt(paramNoise.value);
@@ -315,22 +325,14 @@
                 triggerRender();
             });
 
-            paramShowInfo.addEventListener('change', () => {
-                settings.showInfo = paramShowInfo.checked;
-                triggerRender();
-            });
-
             // Bottom Scan & Save Controls
             btnPlayPause.addEventListener('click', toggleScan);
             document.getElementById('btnSave').addEventListener('click', saveMasterpiece);
-
-            window.addEventListener('resize', triggerRender);
 
             triggerRender();
         };
 
         function setupTouchAndMouse() {
-            // Touch Events (Single finger pan, multi-finger pinch & rotate)
             canvas.addEventListener('touchstart', (e) => {
                 if (!imgState.loaded) return;
                 const touches = e.touches;
@@ -376,17 +378,14 @@
                     const currAngle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
                     const currCenter = { x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2 };
 
-                    // Zoom
                     if (touchState.startDist > 0) {
                         const zoomFactor = currDist / touchState.startDist;
                         imgState.scale = Math.max(0.1, Math.min(8, touchState.startScale * zoomFactor));
                     }
 
-                    // Rotation
                     const angleDiff = currAngle - touchState.startAngle;
                     imgState.rotation = touchState.startRotation + angleDiff;
 
-                    // Translation during multi-touch
                     imgState.x = touchState.startOffset.x + (currCenter.x - touchState.startCenter.x);
                     imgState.y = touchState.startOffset.y + (currCenter.y - touchState.startCenter.y);
                 }
@@ -443,8 +442,8 @@
 
         function getCanvasCoords(e, rect) {
             return {
-                x: (e.clientX - rect.left) * (CANVAS_SIZE / rect.width),
-                y: (e.clientY - rect.top) * (CANVAS_SIZE / rect.height)
+                x: (e.clientX - rect.left) * (canvas.width / rect.width),
+                y: (e.clientY - rect.top) * (canvas.height / rect.height)
             };
         }
 
@@ -456,13 +455,8 @@
                     imgState.imgObj = img;
                     imgState.loaded = true;
                     
-                    const scaleW = CANVAS_SIZE / img.width;
-                    const scaleH = CANVAS_SIZE / img.height;
-                    imgState.scale = Math.min(scaleW, scaleH) * 0.85;
-                    imgState.x = CANVAS_SIZE / 2;
-                    imgState.y = CANVAS_SIZE / 2;
-                    imgState.rotation = 0;
-
+                    updateCanvasDimensions();
+                    fitImageToCanvas();
                     resetScan();
                 };
                 img.src = event.target.result;
@@ -493,8 +487,8 @@
             const btnX = document.getElementById('btnDirX');
             const btnY = document.getElementById('btnDirY');
 
-            const activeClass = "dir-btn py-3 bg-emerald-500/10 border-emerald-500/50 text-emerald-300 active:scale-95 border rounded-xl transition flex items-center justify-center font-bold shadow-sm";
-            const inactiveClass = "dir-btn py-3 bg-slate-800 hover:bg-slate-700 active:scale-95 border border-slate-700 rounded-xl transition flex items-center justify-center text-slate-300 font-bold shadow-sm";
+            const activeClass = "dir-btn py-2 px-1 bg-emerald-500/10 border-emerald-500/50 text-emerald-300 active:scale-95 border rounded-xl transition flex flex-col items-center justify-center gap-1 font-medium shadow-sm";
+            const inactiveClass = "dir-btn py-2 px-1 bg-slate-800 hover:bg-slate-700 active:scale-95 border border-slate-700 rounded-xl transition flex flex-col items-center justify-center gap-1 text-slate-300 font-medium shadow-sm";
 
             btnX.className = dir === 'X' ? activeClass : inactiveClass;
             btnY.className = dir === 'Y' ? activeClass : inactiveClass;
@@ -508,8 +502,8 @@
             const btnColor = document.getElementById('btnColorMode');
             const btnBW = document.getElementById('btnBWMode');
 
-            const activeClass = "color-btn py-3 bg-emerald-500/10 border-emerald-500/50 text-emerald-300 active:scale-95 border rounded-xl transition flex items-center justify-center font-bold shadow-sm";
-            const inactiveClass = "color-btn py-3 bg-slate-800 hover:bg-slate-700 active:scale-95 border border-slate-700 rounded-xl transition flex items-center justify-center text-slate-300 font-bold shadow-sm";
+            const activeClass = "color-btn py-2 px-1 bg-emerald-500/10 border-emerald-500/50 text-emerald-300 active:scale-95 border rounded-xl transition flex flex-col items-center justify-center gap-1 font-medium shadow-sm";
+            const inactiveClass = "color-btn py-2 px-1 bg-slate-800 hover:bg-slate-700 active:scale-95 border border-slate-700 rounded-xl transition flex flex-col items-center justify-center gap-1 text-slate-300 font-medium shadow-sm";
 
             btnColor.className = mode === 'color' ? activeClass : inactiveClass;
             btnBW.className = mode === 'bw' ? activeClass : inactiveClass;
@@ -517,8 +511,15 @@
             triggerRender();
         }
 
+        function resetCanvasAndImage() {
+            if (imgState.loaded) {
+                fitImageToCanvas();
+            }
+            resetScan();
+        }
+
         function resetScanBuffer() {
-            scanBufferCtx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+            scanBufferCtx.clearRect(0, 0, canvas.width, canvas.height);
             triggerRender();
         }
 
@@ -538,8 +539,9 @@
                 return;
             }
 
+            const maxBound = scanDirection === 'Y' ? canvas.height : canvas.width;
             isScanning = !isScanning;
-            if (isScanning && scanLinePos >= CANVAS_SIZE) {
+            if (isScanning && scanLinePos >= maxBound) {
                 resetScanBuffer();
                 scanLinePos = 0;
             }
@@ -573,9 +575,9 @@
         }
 
         function renderLiveSource() {
-            liveSourceCtx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+            liveSourceCtx.clearRect(0, 0, canvas.width, canvas.height);
             liveSourceCtx.fillStyle = '#0b0f19';
-            liveSourceCtx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+            liveSourceCtx.fillRect(0, 0, canvas.width, canvas.height);
 
             if (imgState.loaded && imgState.imgObj) {
                 liveSourceCtx.save();
@@ -595,12 +597,13 @@
         function processSlitScanSlice() {
             if (!isScanning || !imgState.loaded) return;
 
+            const maxBound = scanDirection === 'Y' ? canvas.height : canvas.width;
             const speed = settings.speed;
             const startPos = scanLinePos;
             const endPos = scanLinePos + speed;
             const overlap = 0.5;
 
-            if (endPos > startPos && startPos < CANVAS_SIZE) {
+            if (endPos > startPos && startPos < maxBound) {
                 scanBufferCtx.save();
                 scanBufferCtx.imageSmoothingEnabled = true;
                 scanBufferCtx.imageSmoothingQuality = 'high';
@@ -608,14 +611,14 @@
                 if (scanDirection === 'Y') {
                     scanBufferCtx.drawImage(
                         liveSourceCanvas, 
-                        0, startPos, CANVAS_SIZE, (endPos - startPos) + overlap,
-                        0, startPos, CANVAS_SIZE, (endPos - startPos) + overlap
+                        0, startPos, canvas.width, (endPos - startPos) + overlap,
+                        0, startPos, canvas.width, (endPos - startPos) + overlap
                     );
                 } else {
                     scanBufferCtx.drawImage(
                         liveSourceCanvas, 
-                        startPos, 0, (endPos - startPos) + overlap, CANVAS_SIZE,
-                        startPos, 0, (endPos - startPos) + overlap, CANVAS_SIZE
+                        startPos, 0, (endPos - startPos) + overlap, canvas.height,
+                        startPos, 0, (endPos - startPos) + overlap, canvas.height
                     );
                 }
                 scanBufferCtx.restore();
@@ -623,7 +626,7 @@
 
             scanLinePos += speed;
 
-            if (scanLinePos >= CANVAS_SIZE) {
+            if (scanLinePos >= maxBound) {
                 isScanning = false;
                 updatePlayBtnUI();
                 triggerRender();
@@ -631,7 +634,7 @@
         }
 
         function renderMainComposite() {
-            ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.save();
 
             // Apply Grayscale Filter if B&W selected
@@ -644,22 +647,22 @@
             if (!imgState.loaded) {
                 // Empty Placeholder UI
                 ctx.fillStyle = '#0b0f19';
-                ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 ctx.strokeStyle = 'rgba(16, 185, 129, 0.2)';
                 ctx.lineWidth = 2;
                 ctx.setLineDash([8, 8]);
-                ctx.strokeRect(50, 50, CANVAS_SIZE - 100, CANVAS_SIZE - 100);
+                ctx.strokeRect(30, 30, canvas.width - 60, canvas.height - 60);
 
                 ctx.fillStyle = '#64748b';
-                ctx.font = 'bold 22px "Inter", sans-serif';
+                ctx.font = 'bold 20px "Inter", sans-serif';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                ctx.fillText("点击“+”加号按钮上传图片", CANVAS_SIZE / 2, CANVAS_SIZE / 2 - 15);
+                ctx.fillText("点击“+”上传图片", canvas.width / 2, canvas.height / 2 - 15);
 
                 ctx.fillStyle = '#475569';
-                ctx.font = '14px "Inter", sans-serif';
-                ctx.fillText("支持单指拖动、双指缩放及旋转", CANVAS_SIZE / 2, CANVAS_SIZE / 2 + 20);
+                ctx.font = '13px "Inter", sans-serif';
+                ctx.fillText("支持单指拖动、双指缩放及旋转", canvas.width / 2, canvas.height / 2 + 20);
                 ctx.restore();
                 return;
             }
@@ -667,21 +670,21 @@
             // A. Draw Live Interactive Unscanned Area
             ctx.drawImage(liveSourceCanvas, 0, 0);
 
-            // B. Overlay Scanned Frozen Area (WYSIWYG slit-scan result directly on top)
+            // B. Overlay Scanned Frozen Area (WYSIWYG slit-scan result)
             if (scanLinePos > 0) {
                 ctx.save();
                 ctx.beginPath();
                 if (scanDirection === 'Y') {
-                    ctx.rect(0, 0, CANVAS_SIZE, Math.min(scanLinePos, CANVAS_SIZE));
+                    ctx.rect(0, 0, canvas.width, Math.min(scanLinePos, canvas.height));
                 } else {
-                    ctx.rect(0, 0, Math.min(scanLinePos, CANVAS_SIZE), CANVAS_SIZE);
+                    ctx.rect(0, 0, Math.min(scanLinePos, canvas.width), canvas.height);
                 }
                 ctx.clip();
                 ctx.drawImage(scanBufferCanvas, 0, 0);
                 ctx.restore();
             }
 
-            ctx.restore(); // Restore filter state
+            ctx.restore();
 
             // C. Apply Noise Grain Overlay
             if (settings.noise > 0) {
@@ -691,7 +694,7 @@
                 
                 const pattern = ctx.createPattern(noiseCanvas, 'repeat');
                 ctx.fillStyle = pattern;
-                ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.restore();
             }
 
@@ -706,30 +709,12 @@
                 ctx.beginPath();
                 if (scanDirection === 'Y') {
                     ctx.moveTo(0, scanLinePos);
-                    ctx.lineTo(CANVAS_SIZE, scanLinePos);
+                    ctx.lineTo(canvas.width, scanLinePos);
                 } else {
                     ctx.moveTo(scanLinePos, 0);
-                    ctx.lineTo(scanLinePos, CANVAS_SIZE);
+                    ctx.lineTo(scanLinePos, canvas.height);
                 }
                 ctx.stroke();
-                ctx.restore();
-            }
-
-            // E. Show Parameters HUD Info
-            if (settings.showInfo && imgState.loaded) {
-                ctx.save();
-                ctx.fillStyle = '#10b981';
-                ctx.font = '500 13px "Fira Code", monospace';
-                ctx.textAlign = 'left';
-                ctx.textBaseline = 'top';
-
-                const hudText = `DIR: ${scanDirection === 'Y' ? 'VERTICAL' : 'HORIZONTAL'} | COLOR: ${settings.colorMode.toUpperCase()} | NOISE: ${settings.noise}%`;
-                
-                ctx.fillStyle = 'rgba(11, 15, 25, 0.7)';
-                ctx.fillRect(15, 15, ctx.measureText(hudText).width + 16, 24);
-                
-                ctx.fillStyle = '#10b981';
-                ctx.fillText(hudText, 23, 20);
                 ctx.restore();
             }
         }
